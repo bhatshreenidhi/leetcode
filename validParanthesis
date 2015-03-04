@@ -1,0 +1,34 @@
+public class Solution {
+    public boolean isValid(String str) {
+        
+        if(str.length()==0)
+            return true;
+        
+        Stack s = new Stack();
+        
+        for(int i=0;i<str.length();i++)
+        {   
+            char currChar = str.charAt(i);
+            
+            if(currChar=='(' || currChar=='{' || currChar=='[')
+                s.push(currChar+"");
+            else
+            {
+                try {
+                        String pop = (s.pop()).toString();
+                        if(currChar==')' && !pop.equals("(")) return false;
+                        if(currChar==']' && !pop.equals("[")) return false;
+                        if(currChar=='}' && !pop.equals("{")) return false;
+                    } catch (Exception e) {
+                        return false;
+                    }
+            }
+            
+        }
+        
+        if(s.empty())
+        return true;
+        else return false;
+        
+    }
+}
