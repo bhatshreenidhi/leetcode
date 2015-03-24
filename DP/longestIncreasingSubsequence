@@ -27,21 +27,25 @@ public static int longestSubsequece(int[] num)
 
 	//Take an auxillary array L[]
 	//L[i] will represent the length of the maximum increasing subsequence from 0 to i
-	//L[0] = 1
-	
-	//L[i] = L[i-1] if num[i]<num[i-1]
-	//L[i] = L[i-1]+1 if num[i]>num[i-1]
+	int L[] = new L[len]();
 
-	L[0] = 1; 
+	for(int i=0;i<len;i++)
+		L[i] = 1;
+
+	for(int i=1;i<len;i++)
+		for(int j=0;j<i;j++)
+		{
+			if(num[i]>num[j] && L[i]<L[j]+1)
+				L[i]=L[j]+1;
+		}
+
+	int max = num[0];
 	for(int i=1;i<len;i++)
 	{
-		if(num[i]<num[i-1])
-			L[i] = L[i-1];
-		else
-			L[i] = L[i-1]+1;
+		if(num[i]>max)
+			max = num[i];
 	}
 
-	//Maximum of the L[] will be the lenght of the maximum increasing subsequence whc is the value at the end
-	return L[len-1];
-
+	return max;
+	
 }
