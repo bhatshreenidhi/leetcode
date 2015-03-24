@@ -1,0 +1,47 @@
+/*
+Longest increasing subsequence - Not necessary to be continuous
+
+Example :
+ 3 2 6 4 5 1
+Increasing subsequences
+-> (3,6) (2,6)  (4, 5)  (2,4,5)    (3,4,5)
+Find the longest increasing subsequences
+
+https://www.youtube.com/watch?v=4fQJGoeW5VE
+
+Brute forces Is - O(2^n)
+Try all possible combinations.
+
+Using DP.
+At every position, u will check from the beginning the total length of the increasing subsequence and fill it in an array.
+	
+Max of array is the output
+*/
+
+public static int longestSubsequece(int[] num)
+{
+	if(num==null || num.length==0)
+		return 0;
+
+	int len = num.length;
+
+	//Take an auxillary array L[]
+	//L[i] will represent the length of the maximum increasing subsequence from 0 to i
+	//L[0] = 1
+	
+	//L[i] = L[i-1] if num[i]<num[i-1]
+	//L[i] = L[i-1]+1 if num[i]>num[i-1]
+
+	L[0] = 1; 
+	for(int i=1;i<len;i++)
+	{
+		if(num[i]<num[i-1])
+			L[i] = L[i-1];
+		else
+			L[i] = L[i-1]+1;
+	}
+
+	//Maximum of the L[] will be the lenght of the maximum increasing subsequence whc is the value at the end
+	return L[len-1];
+
+}
