@@ -1,0 +1,41 @@
+/*
+longest palindromic subsequence
+
+return length of the longest subsequence - not substring.
+
+
+DP - 
+http://ajeetsingh.org/2013/11/12/find-longest-palindrome-sub-sequence-in-a-string/
+
+*/
+
+public int lonestPalindromeSubsequence(String a)
+{
+	int n = a.length;
+	int [] L = new int [n][n];
+
+	for(int i=0;i<n;i++)
+		L[i][i] = 1;
+
+	for(int gap = 1;gap<n;gap++)
+	{
+		for(int i=0;i<n-gap;i++)
+		{
+			int j = i+gap;
+
+			if(j=i+1 && a.charAt(i)=a.charAt(j))
+				L[i][j] = 2;
+			else if(a.charAt(i)==a.charAt(j))
+				L[i][j] = 2 + L[i+1][j-1];
+			else
+				L[i][j] = Math.max(L[i][j-1],L[i+1][j]);
+
+		}
+
+	}
+
+	return L[0][n-1];
+
+
+}
+
