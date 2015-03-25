@@ -27,7 +27,7 @@ public static int longestSubsequece(int[] num)
 
 	//Take an auxillary array L[]
 	//L[i] will represent the length of the maximum increasing subsequence from 0 to i
-	int L[] = new L[len]();
+	int [] L = new int[len]();
 
 	for(int i=0;i<len;i++)
 		L[i] = 1;
