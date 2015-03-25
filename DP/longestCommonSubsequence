@@ -4,14 +4,24 @@ Given 2 strings of length m and n , return the longest common subsequence
 Recurance relation
 
 LCS(i,j) 
-			= 1+LCS(i-1,j-1) if (A[i]==A[j])
-			= MAX(LCS(i,j-1),LCS(i-1,j)) if (A[i]!=A[j])
+			= 1+LCS(i-1,j-1) if (A1[i]==A2[j])
+			= MAX(LCS(i,j-1),LCS(i-1,j)) if (A1[i]!=A2[j])
 
 //http://www.geeksforgeeks.org/dynamic-programming-set-4-longest-common-subsequence/
 
+
+****** Print the LCS *********
+http://www.geeksforgeeks.org/printing-longest-common-subsequence/
+
+Once you have the LCS, Initialize an array of length length(LCS)+1
+Starting from LCS[m][n], 
+	include the characters corresponding to LCS[i][j] if X[i]=Y[j].
+
+if not traverse through the array in the direction of greater value  L[i-1][j] and L[i][j-1]	
+
 */
 
-public static int longestCommonSubsequence(String s1,String s2)
+public static int longestCommonSubsequenceLength(String s1,String s2)
 {
 	int m = s1.length;
 	int n = s2.length;
@@ -43,4 +53,64 @@ public static int longestCommonSubsequence(String s1,String s2)
 	return LCS[m][n];
 }
 
+public static char[] longestCommonSubsequence(String s1,String s2)
+{
+	int m = s1.length;
+	int n = s2.length;
+
+	if(m==0 || n==0)
+		return 0;
+
+	int LCS[][] = new int[m+1][n+1];
+
+	for(int i=0;i<m+1;i++)
+		LCS[i][0] = 0;
+	
+	for(int i=0;i<n+1;i++)
+		LCS[0][i] = 0;
+
+	for(int i =1;i<=m;i++)
+		for(int j=1;j<=n;j++)
+		{
+			if(s1.charAt(i)==s2.charAt(j))
+			{
+				LCS[i][j] = 1+LCS[i-1][j-1];	
+			}
+			else
+			{
+				LCS[i][j] = Math.max(LCS[i][j-1],LCS[i-1][j]);
+			}
+		}
+
+	return LCS[m][n];
+
+	int len = LCS[m][n]+1;
+	char subSequence[] = new char[len];
+	subSequence[len] = '\0';
+
+	int i = m;
+	int j = n;
+
+		while(i>=1 && j>=1)
+		{
+			int index = LCS[i-1][j-1];
+
+			if(s1.charAt(index)==s1.charAt(index))
+			{
+				subSequence[len--] = s1.charAt(index);
+				i--;
+				j--;
+			}
+			else if(LCS[i-1][j]>LCS[i][j-1])
+			{
+				i--;
+			}
+			else
+				j--;
+
+		}
+
+	return subSequence;
+
+}
 
