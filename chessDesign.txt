@@ -1,0 +1,156 @@
+//all the pieces
+public enum PieceType {
+    None, Pawn, Knight, Bishop, Rook, Queen, King
+}
+
+
+public enum PieceColor {
+    White, Black
+}
+
+public enum Result {
+    Draw,WhiteWin, BlackWin
+}
+
+
+public class Game {
+    public Board Board { get; }
+    public List<Move> Movelist { get; }
+    public Player currentTurn { get; set; }
+    public int Halfmoves { get; set; }
+  	public Result gameResult;
+	Player p1,p2;
+
+	public Board beginGame(){
+
+		//initialize Board
+		//iniitalize Players
+		//Alternatively make the players to make moves till isEnded() returns true 
+	};
+
+	public boolean isEnded(){};
+	public Player winner(){};
+
+}
+
+public class Board {
+    private Square[][] squareSet;
+    public Piece[][] pieceSet { get; set; }
+    public Board()
+    {
+    	// iniitalize squares and the pieces
+    }
+}
+ 
+public class Move {
+    public Square From { get; }
+    public Square To { get; }
+    public Piece PieceMoved { get; }
+    public Piece PieceCaptured { get; }
+
+}
+ 
+
+public class Player {
+    public PieceColor Color { get; set; }
+    public List<Piece> listPieces;
+    public void makeMove(Piece piece,Square from,Square to)
+}
+
+
+public class Square {
+    public int X { get; set; }
+    public int Y { get; set; }
+}
+
+
+public abstract class Piece {
+    public abstract PieceType Type { get; set; }
+    public PieceColor Color { get; set; }
+    public Square currentPos;
+
+
+    public abstract List<Square> validMoves(){}
+
+    public abstract List<Square> attackMoves(){}
+
+	public abstract List<Square> riskyMoves(){}     
+
+	public abstract List<Square> safeMoves(){}     
+}
+
+// When a pawn is able to reach the opponent-end, it has a chance to be converted to another piece(promotion)
+// This is indicated by a flag
+public class Pawn extends Piece
+{
+	public  PieceType Type = PieceType.Pawn;
+
+	pubic boolean isPromoted;
+
+	public PieceType promotedPieceType;
+
+	public  List<Square> validMoves(){}
+
+    public  List<Square> attackMoves(){}
+
+	public  List<Square> riskyMoves(){}     
+
+	public  List<Square> safeMoves(){} 
+}
+
+
+
+public class King extends Piece
+{
+	public  PieceType Type = PieceType.King;
+
+	public  List<Square> validMoves(){}
+
+    public  List<Square> attackMoves(){}
+
+	public  List<Square> riskyMoves(){}     
+
+	public  List<Square> safeMoves(){} 
+}
+
+public class Queen extends Piece
+{
+	public  PieceType Type = PieceType.Queen;
+
+	public  List<Square> validMoves(){}
+
+    public  List<Square> attackMoves(){}
+
+	public  List<Square> riskyMoves(){}     
+
+	public  List<Square> safeMoves(){} 
+}
+
+public class Knight extends Piece
+{
+	public  PieceType Type = PieceType.Knight;
+
+	public  List<Square> validMoves(){}
+
+    public  List<Square> attackMoves(){}
+
+	public  List<Square> riskyMoves(){}     
+
+	public  List<Square> safeMoves(){} 
+}
+
+public class Rook extends Piece
+{
+	public  PieceType Type = PieceType.Rook;
+
+	public  List<Square> validMoves(){}
+
+    public  List<Square> attackMoves(){}
+
+	public  List<Square> riskyMoves(){}     
+
+	public  List<Square> safeMoves(){} 
+}
+
+
+
